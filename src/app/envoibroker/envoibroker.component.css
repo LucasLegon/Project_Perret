@@ -1,0 +1,15 @@
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position : relative;
+}
+
+.shiftr {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position : relative;
+    margin-top: 10px
+}
+

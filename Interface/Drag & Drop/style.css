@@ -1,0 +1,98 @@
+body {
+	padding:32px;
+    background: url('Images/fond.png') repeat-x;
+}
+
+.titre
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+h1
+{
+    font-family: 'Comic Sans MS', serif;
+    color: blue;
+}
+
+
+.shop, .coulor_shop 
+{
+	border-radius:6px;
+    min-height:100px;
+    background-color: rgb(245,246,247);
+}
+
+.cart {
+    background-color: rgba(255,255,255,0.8);
+	border: 4px solid #0066FF;
+	border-radius:6px;
+	min-height:128px;
+	display:block;
+}
+
+.element, .couleur
+{
+    display: flex;
+    justify-content:space-around;
+    flex-direction: row;
+}
+
+
+/* Fonctions */
+#Allumer{
+    border:3px solid rgb(245,246,247);
+}
+
+#Eteindre{
+    border:3px solid rgb(245,246,247);
+}
+
+#Gradient{
+    border:3px solid rgb(245,246,247);
+}
+
+#Clignoter{
+    border:3px solid rgb(245,246,247);
+}
+
+
+/* Hover */
+#Allumer:hover{
+    border:3px solid red;
+	cursor:move;
+}
+
+#Eteindre:hover{
+    border:3px solid red;
+	cursor:move;
+}
+
+#Gradient:hover{
+    border:3px solid red;
+	cursor:move;
+}
+
+#Clignoter:hover{
+    border:3px solid red;
+	cursor:move;
+}
+
+
+
+.itemchoosen {
+	this.style.opacity = 0.5;
+	this.style.border = "2px solid red";
+}
+.itemblurred {
+	this.style.border = none;
+}
+
+#cartArea {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    float: left;
+    border: 1px dotted #999;
+}

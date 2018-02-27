@@ -16,6 +16,7 @@ background-size: cover;
     border:2px solid rgb(245,0,0);
     width:65%;
     height:130px;
+    min-width:900px;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -25,12 +26,23 @@ background-size: cover;
 #accueil
 {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: space-around;
+    flex-direction: column;
     padding: 20px;
     width: 110px;
+}
+
+#accueil_top
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#accueil_down
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #lecture

@@ -1,10 +1,15 @@
 <body>
     <header id="outil">
         <div id="accueil">
-            <img (click)="goNew()" class="fichier" id="New" src="assets/ImPNG/new.svg" width="45" height="55" title="Nouveau">
-            <img (click)="goSave()" class="fichier" id="Save" src="assets/ImPNG/save.svg" width="45" height="48" title="Enregistrer">
-            <img (click)="goBack()" class="fichier" id="Exit" src="assets/ImPNG/exit.svg" width="45" height="45" title="Quitter">
-            <img (click)="goUndo()" class="fichier" id="Undo" src="assets/ImPNG/undo.svg" width="45" height="49" title="Annuler">
+            <div id="accueil_top">
+                <img (click)="goNew()" class="fichier" id="New" src="assets/ImPNG/new.svg" width="45" height="55" title="Nouveau">
+                <img (click)="goSave()" class="fichier" id="Save" src="assets/ImPNG/save.svg" width="45" height="48" title="Enregistrer">
+            </div>
+            
+            <div id="accueil_down">
+                <img (click)="goBack()" class="fichier" id="Exit" src="assets/ImPNG/exit.svg" width="45" height="45" title="Quitter">
+                <img (click)="goUndo()" class="fichier" id="Undo" src="assets/ImPNG/undo.svg" width="45" height="49" title="Annuler">
+            </div>
         </div>
             
         <div id="lecture">

@@ -11,6 +11,10 @@ export class EditorComponent implements OnInit {
   constructor(private location: Location) { }
 
   ngOnInit() {
+         /////////////////
+        // DRAG & DROP //
+       /////////////////
+        
        var dndHandler = {
 
         draggedElement: null, // Propriété pointant vers l'élément en cours de déplacement

@@ -1,3 +1,4 @@
+/* Fond d'écran */
 body {
     background: url(fond.svg) no-repeat center center fixed;
 /* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
@@ -7,6 +8,10 @@ body {
 background-size: cover;
 }
 
+
+
+/* Barre d'outil en haut à droite */
+/* composée de quatre sections : accueil, lecture, fonction, teinte */
 #outil
 {
     display: flex;
@@ -17,8 +22,9 @@ background-size: cover;
     width:65%;
     height:130px;
     min-width:900px;
-    position: relative;
-    left: 522px;
+    position: absolute; /* Position de la barre d'outil */
+    right: 0px;
+    top: 0px;
 }
 
 #accueil
@@ -108,28 +114,6 @@ p
 }
 
 
-section
-{
-    padding-left: 170px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer
-{
-    position: absolute;
-    right: 200px;
-    bottom: 0px;
-}
-
-/* Fonctions */
-#Allumer, #Eteindre, #Degrader, #Clignoter, #Couleur{
-    
-}
-
-
 /* Hover */
 #Allumer:hover, #Eteindre:hover, #Degrader:hover, #Clignoter:hover, #Couleur:hover{
     opacity: 0.7;
@@ -143,23 +127,66 @@ footer
 
 
 
-#editor {
+
+
+
+/* Partie centrale de l'interface */
+/* La section "Section" regroupe toute la partie centrale : la tour + noms des étages + la partie édition */
+section /* Partie centrale */
+{
+    height: 796px;
+    padding-left: 170px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#nom_etage
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    justify-content: space-around;
+    height: 620px;
     position: relative;
-    bottom: 50px;
-    right: 20px;
+    top: 70px;
+}
+
+h1
+{
+    font-family: 'Comic Sans MS', Arial, sans-serif;
+    font-size: 3em;
+    color: blue;
+    padding: 5px;
+    padding-top: 0px;
+    background: rgba(254,213,196,0.5);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+}
+
+#editor {
+    display: flex;
+    flex-direction: column;
+    height: 620px;
+    justify-content: space-between;
+    position: relative;
+    top: 70px;
+}
+
+#etage1, #etage2, #etage3 {
     display: flex;
     flex-direction: row;
     justify-content:center;
     align-items: center;
 }
 
-#zone-piece
+.zone-piece
 {
     display: flex;
     flex-direction: column; 
 }
 
-#start
+.start
 {
     position: relative;
     left: 19px;

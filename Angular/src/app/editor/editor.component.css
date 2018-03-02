@@ -64,7 +64,10 @@ background-size: cover;
     flex-direction: row;
     padding: 20px;
     width: 400px;
+    height: 90px;
     justify-content: space-between;
+    align-items: center;
+    border-right: 2px solid rgb(245,0,0);
 }
 
 #teinte
@@ -76,7 +79,6 @@ background-size: cover;
     flex-direction: row;
     align-items: center;
     justify-content:space-between;
-    border-left:2px solid rgb(245,0,0);
 }
 
 p
@@ -86,12 +88,15 @@ p
 
 #bloc_color
 {
-    width: 190px;
+    width: 200px;
+    min-width: 200px;
     height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     border:3px solid rgb(5,5,5);
+    position: relative;
+    right: 20px;
 }
 
 #color_top
@@ -114,6 +119,31 @@ p
 }
 
 
+#fond_piece_color
+{
+    width: 45px;
+    height: 46px;
+    background-color: rgb(0,0,0);
+    border: 1px solid silver;
+    position: relative;
+    bottom: 79px;
+    left: 8px;
+}
+
+
+#Couleur
+{
+    height: 83px;
+}
+
+#para_color
+{
+    position: relative;
+    top: 50px;
+    right: 60px;
+}
+
+
 /* Hover */
 #Allumer:hover, #Eteindre:hover, #Degrader:hover, #Clignoter:hover, #Couleur:hover{
     opacity: 0.7;
@@ -128,18 +158,56 @@ p
 
 
 
-
-
 /* Partie centrale de l'interface */
 /* La section "Section" regroupe toute la partie centrale : la tour + noms des étages + la partie édition */
 section /* Partie centrale */
 {
     height: 796px;
-    padding-left: 170px;
+    padding-left: 90px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+#couleur_etage
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 410px;
+    
+    position: relative;
+    top: 120px;
+    left: 88px
+}
+
+#color_etage1
+{
+    width: 80px;
+    height: 130px;
+    background-color: rgb(255,0,0);
+}
+
+#color_etage2
+{
+    width: 80px;
+    height: 130px;
+    background-color: rgb(0,255,0);
+}
+
+#color_etage3
+{
+    width: 80px;
+    height: 130px;
+    background-color: rgb(0,0,255);
+}
+
+#tour
+{
+    position: relative;
+    bottom: 20px;
+    right: 10px;
 }
 
 #nom_etage

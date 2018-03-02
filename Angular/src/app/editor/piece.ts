@@ -1,7 +1,6 @@
 export class Piece {
-    lien : string;
-    red : number;
-    green : number;
-    blue : number;
-    name : string;
+    m_lien : string;
+    m_red : number;
+    m_green : number;
+    m_blue : number;
 }

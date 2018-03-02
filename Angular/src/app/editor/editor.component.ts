@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Piece } from './piece';
 
 @Component({
   selector: 'app-editor',
@@ -7,6 +8,46 @@ import { Location } from '@angular/common';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
+
+         ////////////////////////////////////////
+        // Déclaration des différentes pièces //
+       ////////////////////////////////////////
+
+    Allumer : Piece = {
+        m_lien : 'assets/ImPNG/Pieces/allumer.png',
+        m_red : 25,
+        m_green : 255,
+        m_blue : 255
+    };
+    
+    Eteindre : Piece = {
+        m_lien : 'assets/ImPNG/Pieces/eteindre.png',
+        m_red : 255,
+        m_green : 255,
+        m_blue : 255
+    };
+    
+    Degrader : Piece = {
+        m_lien : 'assets/ImPNG/Pieces/degrade.png',
+        m_red : 255,
+        m_green : 255,
+        m_blue : 255
+    };
+    
+    Clignoter : Piece = {
+        m_lien : 'assets/ImPNG/Pieces/clignoter.png',
+        m_red : 255,
+        m_green : 255,
+        m_blue : 255
+    };
+    
+    Couleur : Piece = {
+        m_lien : 'assets/ImPNG/Pieces/piece_couleur.png',
+        m_red : 255,
+        m_green : 255,
+        m_blue : 255
+    };
+
 
   constructor(private location: Location) { }
 
@@ -82,19 +123,94 @@ export class EditorComponent implements OnInit {
 
   }
   
-  goBack(): void {
-    this.location.back();
-  }
   
-  goNew(): void {
-    alert('Création d\'un nouveau document');
-  }
-  goSave(): void {
-    alert('Travail enregistré');
-  }
-  goUndo(): void {
-    alert('Retour arrière');  
-  }
   
+         ///////////////////////
+        // Actions aux clics //
+       ///////////////////////
+
+// Accueil
+    goBack(): void {
+        this.location.back();
+    }
+  
+    goNew(): void {
+        alert('Création d\'un nouveau document');
+    }
+    
+    goSave(): void {
+        alert('Travail enregistré');
+    }
+  
+    goUndo(): void {
+        alert('Retour arrière');  
+    }
+ 
+ 
+// Lecture
+    start() : void {
+        var etage3 = document.getElementById("color_etage3");
+        var elmt3 = document.getElementById("etage3").getElementsByClassName("fonct"), elmt3_Len = elmt3.length;
+
+    for (var i = 0; i < elmt3_Len; i++) {
+        console.log("%d : Piece",i);
+    }
+    
+        etage3.style.backgroundColor = "rgb(25,255,255)";
+    }
+    
+    stop() : void {
+    
+    }
+
+
+// Couleur
+    putNoir(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "black";
+    }
+  
+    putMarron(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "maroon";
+    }
+  
+    putOrange(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "orange";
+    }
+  
+    putVert(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "green";
+    }
+  
+    putBlanc(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "white";
+    }
+  
+    putRouge(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "red";
+    }
+  
+    putJaune(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "yellow";
+    }
+
+    putBleu(): void {
+        var divColor = document.getElementById("fond_piece_color");
+    
+        divColor.style.backgroundColor = "blue";
+    }
   
 }

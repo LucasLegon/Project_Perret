@@ -1,23 +1,17 @@
 export class Piece {
-    m_red : number;
-    m_green : number;
-    m_blue : number;
+    m_style : string;
+    m_id : string;
     
-    constructor(rouge : number, vert : number, bleu : number) {
-        this.m_red = rouge;
-        this.m_green = vert;
-        this.m_blue = bleu;
+    constructor(style : string, id : string) {
+        this.m_style = style;
+        this.m_id = id;
     }
     
-    getRed() {
-        return this.m_red;
+    getStyle() {
+        return this.m_style;
     }
     
-    getGreen() {
-        return this.m_green;
-    }
-    
-    getBlue() {
-        return this.m_blue;
+    getId() {
+        return this.m_id;
     }
 }

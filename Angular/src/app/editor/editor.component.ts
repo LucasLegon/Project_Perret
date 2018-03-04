@@ -18,17 +18,6 @@ export class EditorComponent implements OnInit {
         // Déclaration des différentes pièces //
        ////////////////////////////////////////
 
-    Allumer = new Piece(25,255,255);
-    
-    Eteindre = new Piece(255,255,255);
-
-    Degrader = new Piece(255,255,255);
-
-    Clignoter = new Piece(255,255,255);
-    
-    Couleur = new Piece(255,255,255);
-
-
 
   constructor(private location: Location) { }
 
@@ -146,13 +135,24 @@ export class EditorComponent implements OnInit {
         tab_color_top_eta3=tableauCouleur("etage3_top");
         var tab_color_top_eta3_len = tab_color_top_eta3.length;
 
-        // TABLEAU DE FONCTIONS //
+        // TABLEAU DES IDs DES FONCTIONS //
         var tab_id_eta3 = new Array();
         tab_id_eta3 = tableauId("etage3_middle");
-
-        // ALLUMAGE DE LA TOUR //
-        var i = 0;
-        allumerTour(etage3,tab_color_top_eta3,tab_color_top_eta3_len,i);
+        var tab_id_eta3_len = tab_id_eta3.length;
+        
+        // TABLEAU DES PIECES FONCTIONS //
+        var tab_eta3 = new Array();
+        tab_eta3 = tableauPiece(tab_id_eta3,tab_id_eta3_len,tab_color_top_eta3,tab_color_top_eta3_len);
+        if(tab_eta3==null){
+            alert('Il y a une erreur dans ta programmation');
+        }
+        
+        else{
+            // ALLUMAGE DE LA TOUR //
+            var tab_eta3_len = tab_eta3.length;
+            var i = 0;
+            allumerTour(etage3,tab_eta3,tab_eta3_len,i,1000);
+        }
     }
     
     
@@ -233,16 +233,14 @@ export class EditorComponent implements OnInit {
         // Déclaration des fonctions //
        ///////////////////////////////
 
-// Fonction retournant un tableau de pièces de couleurs
+// Fonction retournant un tableau de couleurs
 function tableauCouleur(id_etage : string) {
     var elmt = document.getElementById(id_etage).getElementsByClassName("piece_color"), elmt_Len = elmt.length;
     var tab_color = new Array(elmt_Len);   // Déclaration du tableau de couleurs
 
     for (var i = 0; i < elmt_Len; i++) {   // Récupération des pièces de couleurs
         var style = getComputedStyle(elmt[i],null).backgroundColor; // Récupération de la couleur des pièces_couleurs
-//        var rgb = style.slice(4,-1).split(',');   // Extraction des niveaux de rouge/vert/bleu
-//        tab_color[i] = new Piece(Number(rgb[0]),Number(rgb[1]),Number(rgb[2]));
-        tab_color[i]=style;
+        tab_color[i]=style; // Mise à jour du tableau avec les styles de couleurs (Par exemple "rgb(25,255,255)"
     }
         
     return tab_color;   // Retour du tableau
@@ -263,25 +261,68 @@ function tableauId(id_etage : string) {
 }
 
 
+
+function tableauPiece(tab_id, tab_id_len, tab_color, tab_color_len)
+{
+    // Vérification du bon nombre de pièces couleurs
+    var nb_piece = 0;
+    for (var i = 0; i < tab_id_len; i++) {
+        if(tab_id[i]!=="Eteindre"){
+            nb_piece++;
+        }
+    }
+    
+    if(nb_piece!==tab_color_len){
+        console.log("ERROR");
+        return null;
+    }
+    
+    else
+    {
+        var tab_eta = new Array(tab_id_len);
+        var k=0;
+        for (var i = 0; i < tab_id_len; i++) {
+            if(tab_id[i]==="Allumer"){
+                tab_eta[i]=new Piece(tab_color[k],"Allumer");
+                k++;
+            }
+            
+            else if(tab_id[i]==="Eteindre"){
+                tab_eta[i]=new Piece("silver","Eteindre");
+            }
+            
+            else if(tab_id[i]==="Degrade"){
+                tab_eta[i]=new Piece(tab_color[k],"Degrade");
+                k++;
+            }
+            
+            else if(tab_id[i]==="Clignoter"){
+                tab_eta[i]=new Piece(tab_color[k],"Clignoter");
+                k++;
+            }
+        }
+        
+        return tab_eta;
+    }
+}
+
+
+
+
+
+
+
+
 // Fonction allumant les étages de la tour passés en paramètres
-function allumerTour(etage,tab_etage,tab_etage_len,i) {
+function allumerTour(etage,tab_etage,tab_etage_len,i,tempo) {
     if(i==tab_etage_len) {
         return 0;
     }
     
     else {
-       // var rouge = tab_etage[i].m_red;
-      //  var vert = tab_etage[i].m_green;
-      //  var bleu = tab_etage[i].m_blue;
-        //etage.style.backgroundColor = "rgb(tab_etage[i].m_red,tab_etage[i].m_green,tab_etage[i].m_blue)";
-      //  etage.style.backgroundColor = "rgb(rouge,25,25)";
-     //   console.log("   ROUGE §§§§ : %d",tab_etage[i].m_red);
-     //   console.log("   ROUGE §§§§ : %d",tab_etage[i].m_green);
-     //   console.log("   ROUGE §§§§ : %d",tab_etage[i].m_blue);
-     
-        console.log("   STYLE § : %s",tab_etage[i]);
-        etage.style.backgroundColor = tab_etage[i];
-        i=i+1;
-        setTimeout(allumerTour, 1000,etage,tab_etage,tab_etage_len,i); // On rappelle la fonction allumerTour avec la temporisation en milisecondes
+        console.log("%s",tab_etage[i].getStyle());
+        etage.style.backgroundColor = tab_etage[i].getStyle(); // Allumage de l'étage avec les styles
+        i++;
+        setTimeout(allumerTour, tempo,etage,tab_etage,tab_etage_len,i,tempo); // On rappelle la fonction allumerTour avec la temporisation en milisecondes
     }
 }

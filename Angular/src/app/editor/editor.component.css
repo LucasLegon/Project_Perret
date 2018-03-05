@@ -1,5 +1,17 @@
 /* ANIMATION Keyframes */
 
+@-webkit-keyframes anim_poubelle { /* Safari, Opera, Chrome */
+    0%{
+        transform: rotate(5deg);
+    }
+    
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+
+
 @-webkit-keyframes anim_etage1 { /* Safari, Opera, Chrome */
     0% {
         background-color: fuchsia;
@@ -234,7 +246,8 @@ section /* Partie centrale */
     justify-content: space-around;
     height: 620px;
     position: relative;
-    top: 70px;
+    top: 50px;
+    right: 40px;
 }
 
 h1
@@ -251,10 +264,11 @@ h1
 #editor {
     display: flex;
     flex-direction: column;
-    height: 620px;
+    height: 600px;
     justify-content: space-between;
     position: relative;
-    top: 70px;
+    top: 50px;
+    right: 50px;
 }
 
 #etage1, #etage2, #etage3 {
@@ -289,4 +303,16 @@ h1
     position: relative;
     bottom: 21px;
     transform: rotate(180deg);
+}
+
+
+
+.poubelle{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.poubelle_hover{
+    animation: anim_poubelle 0.15s alternate infinite;
 }

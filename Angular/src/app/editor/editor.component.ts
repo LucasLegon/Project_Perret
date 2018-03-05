@@ -70,7 +70,9 @@ export class EditorComponent implements OnInit {
 
                 clonedElement = target.appendChild(clonedElement); // Ajout de l'élément cloné à la zone de drop actuelle
                 dndHandler.applyDragEvents(clonedElement); // Nouvelle application des événements qui ont été perdus lors du cloneNode()
-
+                if((draggedElement.parentNode.parentNode.id!=="fonction")&&(draggedElement.parentNode.id!=="teinte")){
+                    draggedElement.parentNode.removeChild(draggedElement); // Suppression de l'élément
+                }
             });
 
         }

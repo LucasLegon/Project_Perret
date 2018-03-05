@@ -128,48 +128,17 @@ export class EditorComponent implements OnInit {
     start() : void {
     
         // ETAGE 3 //
+        var etage1 = document.getElementById("color_etage1");
+        var etage2 = document.getElementById("color_etage2");
         var etage3 = document.getElementById("color_etage3");
         
-        // TABLEAU DE COULEURS TOP //
-        var tab_color_top_eta3 = new Array();
-        tab_color_top_eta3=tableauCouleur("etage3_top");
-        var tab_color_top_eta3_len = tab_color_top_eta3.length;
-
-        // TABLEAU DES IDs DES FONCTIONS //
-        var tab_id_eta3 = new Array();
-        tab_id_eta3 = tableauId("etage3_middle");
-        var tab_id_eta3_len = tab_id_eta3.length;
         
-        // TABLEAU DES PIECES FONCTIONS //
-        var tab_eta3 = new Array();
-        tab_eta3 = tableauPiece(tab_id_eta3,tab_id_eta3_len,tab_color_top_eta3,tab_color_top_eta3_len);
-        if(tab_eta3==null){
-            alert('Il y a une erreur dans ta programmation');
-        }
-        
-        else{
-            // ALLUMAGE DE LA TOUR //
-            var tab_eta3_len = tab_eta3.length;
-            var i = 0;
-            allumerTour(etage3,tab_eta3,tab_eta3_len,i,1000);
-        }
+        playEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+        playEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+        playEtage(etage3,"etage3_down","etage3_middle","etage3_top");
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     
     stop() : void {
     
@@ -233,6 +202,39 @@ export class EditorComponent implements OnInit {
         // Déclaration des fonctions //
        ///////////////////////////////
 
+
+// Fonction principale faisant le traitement pour un étage passé en paramètre
+function playEtage(etage,down,middle,top){
+    // TABLEAU DE COULEURS TOP //
+    var tab_color_top = new Array();
+    tab_color_top = tableauCouleur(top);
+    var tab_color_top_len = tab_color_top.length;
+    
+    // TABLEAU DE COULEURS DOWN //
+    var tab_color_down = new Array();
+    tab_color_down = tableauCouleur(down);
+    var tab_color_down_len = tab_color_down.length;
+    
+    // TABLEAU DES IDs DES FONCTIONS //
+    var tab_id = new Array();
+    tab_id = tableauId(middle);
+    var tab_id_len = tab_id.length;
+    
+    // TABLEAU DES PIECES FONCTIONS //
+    var tab = new Array();
+    tab = tableauPiece(tab_id,tab_id_len,tab_color_top,tab_color_top_len,tab_color_down,tab_color_down_len);
+    if(tab==null){
+        alert('Il y a une erreur dans ta programmation');
+    }
+    else{
+        // ALLUMAGE DE LA TOUR //
+        var tab_len = tab.length;
+        var i = 0;
+        playTour(etage,tab,tab_len,i,1000);
+    }
+}
+
+
 // Fonction retournant un tableau de couleurs
 function tableauCouleur(id_etage : string) {
     var elmt = document.getElementById(id_etage).getElementsByClassName("piece_color"), elmt_Len = elmt.length;
@@ -253,7 +255,6 @@ function tableauId(id_etage : string) {
     var tab_id = new Array(elmt_Len);   // Déclaration du tableau d'IDs
 
     for (var i = 0; i < elmt_Len; i++) {   // Récupération des pièces fonctions
-        console.log("   Id : %s",elmt[i].id);
         tab_id[i] = elmt[i].id; // Récupération de l'ID des pièces
     }
         
@@ -261,18 +262,22 @@ function tableauId(id_etage : string) {
 }
 
 
-
-function tableauPiece(tab_id, tab_id_len, tab_color, tab_color_len)
+// Fonction retournant le tableau des pièces fonctions avec Style et Id
+function tableauPiece(tab_id, tab_id_len, tab_color_top, tab_color_top_len,tab_color_down, tab_color_down_len)
 {
     // Vérification du bon nombre de pièces couleurs
     var nb_piece = 0;
+    var nb_piece_double = 0;
     for (var i = 0; i < tab_id_len; i++) {
         if(tab_id[i]!=="Eteindre"){
             nb_piece++;
         }
+        
+        if(tab_id[i]==="Degrader"){
+            nb_piece_double++;
+        }
     }
-    
-    if(nb_piece!==tab_color_len){
+    if((nb_piece!==tab_color_top_len)||(nb_piece_double!==tab_color_down_len)){
         console.log("ERROR");
         return null;
     }
@@ -283,7 +288,7 @@ function tableauPiece(tab_id, tab_id_len, tab_color, tab_color_len)
         var k=0;
         for (var i = 0; i < tab_id_len; i++) {
             if(tab_id[i]==="Allumer"){
-                tab_eta[i]=new Piece(tab_color[k],"Allumer");
+                tab_eta[i]=new Piece(tab_color_top[k],"Allumer");
                 k++;
             }
             
@@ -291,13 +296,13 @@ function tableauPiece(tab_id, tab_id_len, tab_color, tab_color_len)
                 tab_eta[i]=new Piece("silver","Eteindre");
             }
             
-            else if(tab_id[i]==="Degrade"){
-                tab_eta[i]=new Piece(tab_color[k],"Degrade");
+            else if(tab_id[i]==="Degrader"){
+                tab_eta[i]=new Piece(tab_color_top[k],"Degrader");
                 k++;
             }
             
             else if(tab_id[i]==="Clignoter"){
-                tab_eta[i]=new Piece(tab_color[k],"Clignoter");
+                tab_eta[i]=new Piece(tab_color_top[k],"Clignoter");
                 k++;
             }
         }
@@ -307,22 +312,69 @@ function tableauPiece(tab_id, tab_id_len, tab_color, tab_color_len)
 }
 
 
-
-
-
-
-
-
 // Fonction allumant les étages de la tour passés en paramètres
-function allumerTour(etage,tab_etage,tab_etage_len,i,tempo) {
+function playTour(etage,tab_etage,tab_etage_len,i,tempo) {
     if(i==tab_etage_len) {
         return 0;
     }
     
     else {
-        console.log("%s",tab_etage[i].getStyle());
-        etage.style.backgroundColor = tab_etage[i].getStyle(); // Allumage de l'étage avec les styles
+        if(tab_etage[i].getId()==="Allumer"){
+            allumerTour(etage,tab_etage[i]);
+        }
+
+        else if(tab_etage[i].getId()==="Eteindre"){
+            allumerTour(etage,tab_etage[i]);
+        }
+
+        else if(tab_etage[i].getId()==="Degrader"){
+            degraderTour(etage,tab_etage[i]);            
+        }
+
+        else if(tab_etage[i].getId()==="Clignoter"){
+            var nb_clignotement = 5;
+            var tempo_cligno = tempo/nb_clignotement;
+            clignoterTour(etage,tab_etage[i],nb_clignotement,tempo_cligno);
+        }
+        
         i++;
-        setTimeout(allumerTour, tempo,etage,tab_etage,tab_etage_len,i,tempo); // On rappelle la fonction allumerTour avec la temporisation en milisecondes
+        setTimeout(playTour, tempo,etage,tab_etage,tab_etage_len,i,tempo); // On rappelle la fonction allumerTour avec la temporisation en milisecondes
+    }
+}
+
+
+// Fonction appelé lorsque nous avons une piece ALLUMER et ETEINDRE
+function allumerTour(etage,piece){
+    console.log("%s",piece.getId());
+    etage.style.backgroundColor = piece.getStyle(); // Allumage de l'étage avec le style de la fonction
+}
+
+
+// Fonction appelé lorsque nous avons une piece DEGRADER
+function degraderTour(etage,piece){
+    console.log("%s",piece.getId());
+    etage.className='classname';
+}
+
+
+// Fonction appelé lorsque nous avons une piece CLIGNOTER
+function clignoterTour(etage,piece,nb_cligno,tempo){
+    console.log("%s",piece.getId());
+    if(nb_cligno === 0){
+        return 0;
+    }
+
+    else{
+        var style = getComputedStyle(etage,null).backgroundColor; // Récupération de la couleur des pièces_couleurs
+        if(style == piece.getStyle()){
+             etage.style.backgroundColor = "silver";
+        }
+        
+        else{
+            etage.style.backgroundColor = piece.getStyle();
+        }
+        
+        nb_cligno--;
+        setTimeout(clignoterTour, tempo,etage,piece,nb_cligno,tempo);
     }
 }

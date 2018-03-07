@@ -1,0 +1,322 @@
+/* ANIMATION Keyframes */
+
+@-webkit-keyframes anim_poubelle { /* Safari, Opera, Chrome */
+    0%{
+        transform: rotate(5deg);
+    }
+    
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+
+
+@-webkit-keyframes anim_etage1 { /* Safari, Opera, Chrome */
+    0% {
+        background-color: fuchsia;
+    }
+
+    100% {
+        background-color: black;
+    }
+}
+
+.classname{
+    animation: anim_etage1 1s;
+}
+
+/* Fond d'écran */
+body {
+    background: url(fondEditor.svg) no-repeat center center fixed;
+/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+
+
+/* Barre d'outil en haut à droite */
+/* composée de quatre sections : accueil, lecture, fonction, teinte */
+#outil
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(254,213,196);
+    border:2px solid rgb(254,222,202);
+    width:65%;
+    height:130px;
+    min-width:900px;
+    position: absolute; /* Position de la barre d'outil */
+    right: 0px;
+    top: 0px;
+}
+
+#accueil
+{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 110px;
+}
+
+#accueil_top
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#accueil_down
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#lecture
+{
+    display: flex;
+    flex-direction: column;
+    border-left:2px solid rgb(255,255,255);
+    border-right:2px solid rgb(255,255,255);
+    padding: 20px;
+}
+
+#fonction
+{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    width: 400px;
+    height: 90px;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 2px solid rgb(255,255,255);
+}
+
+#teinte
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 310px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+}
+
+
+p
+{
+    text-align: center;
+}
+
+#bloc_color
+{
+    width: 200px;
+    min-width: 200px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border:2px solid rgb(255,255,255);
+    position: relative;
+    right: 20px;
+}
+
+#color_top
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#color_down
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.color
+{   
+    border: 2px solid white;
+}
+
+
+#fond_piece_color
+{
+    width: 45px;
+    height: 46px;
+    background-color: rgb(0,0,0);
+    border: 1px solid silver;
+    position: relative;
+    bottom: 79px;
+    left: 8px;
+}
+
+
+#Couleur
+{
+    height: 83px;
+}
+
+#para_color
+{
+    position: relative;
+    top: 50px;
+    right: 60px;
+}
+
+
+/* Hover */
+#Allumer:hover, #Eteindre:hover, #Degrader:hover, #Clignoter:hover, #Couleur:hover{
+    opacity: 0.7;
+	cursor:grab;
+}
+
+.info
+{
+    display: none;
+}
+
+.fichier:hover{
+    opacity: 0.7;
+	cursor:pointer;
+}
+
+
+/* Partie centrale de l'interface */
+/* La section "Section" regroupe toute la partie centrale : la tour + noms des étages + la partie édition */
+section /* Partie centrale */
+{
+    height: 796px;
+    padding-left: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#couleur_etage
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 410px;
+    
+    position: relative;
+    top: 100px;
+    left: 110px
+}
+
+#color_etage1
+{
+    width: 80px;
+    height: 130px;
+    background-color: silver;
+}
+
+#color_etage2
+{
+    width: 80px;
+    height: 130px;
+    background-color: silver;
+}
+
+#color_etage3
+{
+    width: 80px;
+    height: 130px;
+    background-color: silver;
+}
+
+#tour
+{
+    position: relative;
+    bottom: 37px;
+    right: 45px;
+}
+
+#nom_etage
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    justify-content: space-around;
+    height: 620px;
+    position: relative;
+    top: 50px;
+    right: 40px;
+}
+
+h1
+{
+    font-family: 'Andika', sans-serif;
+    font-size: 3em;
+    color: blue;
+    padding: 5px;
+    padding-top: 0px;
+    background: rgba(254,213,196,0.5);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+}
+
+#editor {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    justify-content: space-between;
+    position: relative;
+    top: 50px;
+    right: 50px;
+}
+
+#etage1, #etage2, #etage3 {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+
+.zone-piece
+{
+    display: flex;
+    flex-direction: column; 
+}
+
+.start
+{
+    position: relative;
+    left: 19px;
+}
+.zone {
+    height: 63px;
+    width: 61px;
+    float: left;
+}
+
+.zone_hover {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8) inset;
+}
+
+.coulor_inverse #Couleur{
+    position: relative;
+    bottom: 21px;
+    transform: rotate(180deg);
+}
+
+
+
+.poubelle{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.poubelle_hover{
+    animation: anim_poubelle 0.15s alternate infinite;
+}

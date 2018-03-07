@@ -38,6 +38,38 @@ background-size: cover;
 
 
 
+
+
+/* Flèches et orientation de la tour */
+/* Mise en forme des flèches et de la lettre N, E, S et W */
+#orientation_tour
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 235px;
+    position: absolute;
+    top: 70px;
+    left: 100px;
+    z-index: 2;
+}
+
+#arrow_left:hover, #arrow_right:hover
+{
+    opacity: 0.7;
+	cursor:pointer;
+}
+
+#orientation
+{
+    font-size: 2.5em;
+    font-weight: bold;
+    color: maroon;
+}
+
+
+
 /* Barre d'outil en haut à droite */
 /* composée de quatre sections : accueil, lecture, fonction, teinte */
 #outil
@@ -89,13 +121,30 @@ background-size: cover;
 #fonction
 {
     display: flex;
-    flex-direction: row;
-    padding: 20px;
+    flex-direction: column;
     width: 400px;
-    height: 90px;
-    justify-content: space-between;
-    align-items: center;
+    height: 130px;
     border-right: 2px solid rgb(245,0,0);
+}
+
+#duree
+{
+    position: relative;
+    bottom: 5px;
+}
+
+#duree_input
+{
+    width: 40px
+}
+
+#piece_fonction
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    bottom: 30px;
 }
 
 #teinte
@@ -236,6 +285,7 @@ section /* Partie centrale */
     position: relative;
     bottom: 20px;
     right: 10px;
+    z-index: 1;
 }
 
 #nom_etage
@@ -269,6 +319,7 @@ h1
     position: relative;
     top: 50px;
     right: 50px;
+    
 }
 
 #etage1, #etage2, #etage3 {
@@ -307,10 +358,17 @@ h1
 
 
 
+#Exit
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 .poubelle{
     position: absolute;
     bottom: 5px;
-    right: 10px;
+    right: 5px;
 }
 
 .poubelle_hover{

@@ -23,7 +23,7 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
         myGlobals.setIndiceLetter(0);
-        
+        myGlobals.setStop(false);
         
         /////////////////
         // DRAG & DROP //
@@ -168,23 +168,24 @@ export class EditorComponent implements OnInit {
     }
   
     goSend(): void {
-        var etage1 = document.getElementById("color_etage1");
-        var etage2 = document.getElementById("color_etage2");
-        var etage3 = document.getElementById("color_etage3");
+        open_infos();
+      //  var etage1 = document.getElementById("color_etage1");
+      // var etage2 = document.getElementById("color_etage2");
+       // var etage3 = document.getElementById("color_etage3");
         
         //Protocole :
         //  X=Etage 1
         //  Y=Etage 2
         //  Z=Etage 3
         
-        var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
-        var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
-        var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
-        console.log("Etage 1 : %s",message_etage1);
-        console.log("Etage 2 : %s",message_etage2);
-        console.log("Etage 3 : %s",message_etage3);
+       // var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+        //var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+       // var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+       // console.log("Etage 1 : %s",message_etage1);
+       // console.log("Etage 2 : %s",message_etage2);
+      //  console.log("Etage 3 : %s",message_etage3);
         
-        alert('Message envoyé'); 
+      //  alert('Message envoyé'); 
     }
   
     goUndo(): void {
@@ -194,33 +195,44 @@ export class EditorComponent implements OnInit {
  
 // Lecture
     start() : void {
-    
-        // ETAGE 3 //
+        myGlobals.setStop(false);
+        
+        // SELECTION ETAGE //
         var etage1 = document.getElementById("color_etage1");
         var etage2 = document.getElementById("color_etage2");
         var etage3 = document.getElementById("color_etage3");
         
+        // FONCTION PRINCIPALE playEtage() //
         playEtage(etage1,"etage1_down","etage1_middle","etage1_top");
         playEtage(etage2,"etage2_down","etage2_middle","etage2_top");
         playEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+        
+        // Réinitialisation de la barre de temps //
+        var barre = document.getElementById("barre_temps");
+        barre.style.opacity = '1';
+        barre.style.left = '39px'; 
+        barreMove(barre);
     }
-
-
-
-
-
 
 
 
     
     stop() : void {
-    
+        myGlobals.setStop(true);
+        var etage1 = document.getElementById("color_etage1");
+        var etage2 = document.getElementById("color_etage2");
+        var etage3 = document.getElementById("color_etage3");
+        
+        // Eteindre la tour //
+        etage1.style.backgroundColor = "silver";
+        etage2.style.backgroundColor = "silver";
+        etage3.style.backgroundColor = "silver";
+        
+        // Réinitialisation de la barre de temps //
+        var barre = document.getElementById("barre_temps");
+        barre.style.left = '39px';
+        barre.style.opacity = '1';
     }
-
-
-
-
-
 
 
 
@@ -321,22 +333,6 @@ function sendEtage(etage,down,middle,top){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Fonction principale faisant le traitement pour un étage passé en paramètre
 function playEtage(etage,down,middle,top){
 
@@ -374,6 +370,7 @@ function playEtage(etage,down,middle,top){
 }
 
 
+
 // Fonction retournant un tableau de couleurs
 function tableauCouleur(id_etage : string) {
     var elmt = document.getElementById(id_etage).getElementsByClassName("piece_color"), elmt_Len = elmt.length;
@@ -388,6 +385,7 @@ function tableauCouleur(id_etage : string) {
 }
 
 
+
 // Fonction retournant un tableau des  IDs des pièces fonctions
 function tableauId(id_etage : string) {
     var elmt = document.getElementById(id_etage).getElementsByClassName("fonct"), elmt_Len = elmt.length;
@@ -399,6 +397,7 @@ function tableauId(id_etage : string) {
         
     return tab_id;   // Retour du tableau
 }
+
 
 
 // Fonction retournant le tableau des pièces fonctions avec Style et Id
@@ -453,9 +452,10 @@ function tableauPiece(tab_id, tab_id_len, tab_color_top, tab_color_top_len,tab_c
 }
 
 
+
 // Fonction allumant les étages de la tour passés en paramètres
 function playTour(etage,tab_etage,tab_etage_len,i,tempo) {
-    if(i==tab_etage_len) {
+    if((i==tab_etage_len)||myGlobals.stop) {
         return 0;
     }
     
@@ -484,11 +484,13 @@ function playTour(etage,tab_etage,tab_etage_len,i,tempo) {
 }
 
 
+
 // Fonction appelé lorsque nous avons une piece ALLUMER et ETEINDRE
 function allumerTour(etage,piece){
     console.log("%s",piece.getId());
     etage.style.backgroundColor = piece.getStyle(); // Allumage de l'étage avec le style de la fonction
 }
+
 
 
 // Fonction appelé lorsque nous avons une piece DEGRADER
@@ -529,6 +531,7 @@ function degraderTour(etage,piece,nbTrans,delay){
 }
 
 
+
 // Fonction appelé lorsque nous avons une piece CLIGNOTER
 function clignoterTour(etage,piece,nb_cligno,tempo){
     console.log("%s",piece.getId());
@@ -551,6 +554,8 @@ function clignoterTour(etage,piece,nb_cligno,tempo){
     }
 }
 
+
+
 // Fonction qui nous renvoie la durée que dois avoir les pièces, en secondes
 function getTempo(){
     return (parseFloat((<HTMLInputElement>document.getElementById("duree_input")).value));
@@ -558,11 +563,7 @@ function getTempo(){
 
 
 
-
-
-
-
-
+// Fonction qui créé la chaine de caractère que nous allons envoyer sur le serveur MQTT. Un protocole a été défini pour coder cette chaine et la décoder facilement
 function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
     //Protocole :
     //  T=Temporisation
@@ -602,9 +603,47 @@ function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
 }
 
 
+
+// Fonction qui convertie une couleur RGB en HEXA. Utilisée dans la fonction creerChaineProtocole
 function rgbToHex(style) {
     var stylergb = style.slice(4,-1).split(',');
 
     var tab_rgb = [parseInt(stylergb[0],10),parseInt(stylergb[1],10),parseInt(stylergb[2],10)];
     return ((1 << 24) + (tab_rgb[0] << 16) + (tab_rgb[1] << 8) + tab_rgb[2]).toString(16).slice(1);
+}
+
+
+
+// Fonction d'annimation de la barre de temps
+function barreMove(elmt) {
+    var tempo = getTempo()*1000;    // Récupération de la durée des pièces
+    var pos = 39;
+    var id = setInterval(frame, tempo/61);
+    function frame() {
+        if ((pos == 955)||(myGlobals.stop)) {
+            clearInterval(id);
+        } 
+
+        else {
+            pos++; 
+            elmt.style.left = pos + 'px'; 
+        }
+    }
+}
+
+
+
+function open_infos() {
+    var width = 500;
+    var height = 300;
+    if(window.innerWidth){
+        var left = (window.innerWidth-width)/2;
+        var top = (window.innerHeight-height)/2;
+    }
+    else
+    {
+        var left = (document.body.clientWidth-width)/2;
+        var top = (document.body.clientHeight-height)/2;
+    }
+    window.open('/tuto3','nom_de_ma_popup','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }

@@ -256,7 +256,7 @@ section /* Partie centrale */
     
     position: relative;
     top: 120px;
-    left: 88px
+    left: 85px
 }
 
 #color_etage1
@@ -311,6 +311,23 @@ h1
     box-shadow: 0 0 60px rgba(0, 0, 0, 1);
 }
 
+
+
+
+/* Partie de l'édition avec les trois zones correspondant aux trois étages */
+/* Barre de temps */
+#barre_temps
+{
+    width: 3px;
+    height: 600px;
+    background-color: silver;
+    opacity: 0;
+    position: relative;
+    top: 50px;
+    left: 39px;
+    z-index: 2;
+}
+
 #editor {
     display: flex;
     flex-direction: column;
@@ -319,7 +336,6 @@ h1
     position: relative;
     top: 50px;
     right: 50px;
-    
 }
 
 #etage1, #etage2, #etage3 {
@@ -344,6 +360,7 @@ h1
     height: 63px;
     width: 61px;
     float: left;
+    z-index: 1;
 }
 
 .zone_hover {

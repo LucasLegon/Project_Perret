@@ -8,9 +8,9 @@ export function setIndiceLetter(newValue: number) {
 
 
 
-// Durée des pièces //
+// Arrêter les annimations //
 
-export var tempo;
-export function setTempo(newValue: number) {
-    tempo = newValue;
+export var stop;
+export function setStop(newValue: Boolean) {
+    stop = newValue;
 }

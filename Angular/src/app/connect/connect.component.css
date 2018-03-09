@@ -1,0 +1,56 @@
+body {
+    /* L'image est positionnée en fond et est centrée */
+    background-color: rgb(254,213,196); 
+}
+
+/* Bloc central */
+h1
+{
+    font-size: 2em;
+}
+
+#connection
+{
+    display: flex;
+    flex-direction: column;
+    background: rgb(200,200,100);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
+    border: 5px rgb(255,242,0) ridge;
+    border-radius: 50px;
+    width: 480px;
+    height: 297px;
+    margin: auto;
+    font-family: 'Andika', Arial, sans-serif;
+    color: white;
+    align-items:center;
+    justify-content: space-between;
+}
+
+#formulaire
+{
+    position: relative;
+    bottom: 30px;
+}
+
+
+#bouton
+{
+    font-family: 'Andika', Arial, sans-serif;
+    color: white;
+    background: linear-gradient(rgb(100,0,0), rgb(245,0,0));
+    border: 1px solid #760001;
+    border-radius: 5px;
+    font-size: 1.2em;
+    text-align: center;
+    height: 30px;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
+    position: relative;
+    bottom: 20px;
+}
+
+#bouton:hover
+{
+    background: linear-gradient(rgb(0,100,0), rgb(0,245,0));
+    cursor:pointer;
+}

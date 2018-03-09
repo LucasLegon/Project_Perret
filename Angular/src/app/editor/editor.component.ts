@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Piece } from './piece';
 import * as myGlobals from './globals';
+import { AppGlobals } from '../macId';
 
 @Component({
   selector: 'app-editor',
@@ -19,7 +20,7 @@ export class EditorComponent implements OnInit {
        ////////////////////////////////////////
 
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private global : AppGlobals) { }
 
   ngOnInit() {
         myGlobals.setIndiceLetter(0);
@@ -168,24 +169,28 @@ export class EditorComponent implements OnInit {
     }
   
     goSend(): void {
-        open_infos();
-      //  var etage1 = document.getElementById("color_etage1");
-      // var etage2 = document.getElementById("color_etage2");
-       // var etage3 = document.getElementById("color_etage3");
+        // SI C'EST LA PREMIERE FOIS
+        console.log("%d",this.global.macID);
+        if(!this.global.macID){
+            open_infos();
+        }
+        var etage1 = document.getElementById("color_etage1");
+       var etage2 = document.getElementById("color_etage2");
+        var etage3 = document.getElementById("color_etage3");
         
         //Protocole :
         //  X=Etage 1
         //  Y=Etage 2
         //  Z=Etage 3
         
-       // var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
-        //var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
-       // var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
-       // console.log("Etage 1 : %s",message_etage1);
-       // console.log("Etage 2 : %s",message_etage2);
-      //  console.log("Etage 3 : %s",message_etage3);
+        var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+        var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+        var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+        console.log("Etage 1 : %s",message_etage1);
+        console.log("Etage 2 : %s",message_etage2);
+        console.log("Etage 3 : %s",message_etage3);
         
-      //  alert('Message envoyé'); 
+        alert('Message envoyé'); 
     }
   
     goUndo(): void {
@@ -210,7 +215,7 @@ export class EditorComponent implements OnInit {
         // Réinitialisation de la barre de temps //
         var barre = document.getElementById("barre_temps");
         barre.style.opacity = '1';
-        barre.style.left = '39px'; 
+        barre.style.left = '41px'; 
         barreMove(barre);
     }
 
@@ -230,8 +235,8 @@ export class EditorComponent implements OnInit {
         
         // Réinitialisation de la barre de temps //
         var barre = document.getElementById("barre_temps");
-        barre.style.left = '39px';
-        barre.style.opacity = '1';
+        barre.style.left = '41px';
+        barre.style.opacity = '0';
     }
 
 
@@ -569,8 +574,9 @@ function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
     //  T=Temporisation
     //  L=Allumer
     //  O=Eteindre
-    //  R=Degrader
+    //  R=Degrader, S=Degrader deuxième couleur
     //  P=Clignoter
+    //  W=Fin
     
     var chaine;
     if(tab_etage_len===0)
@@ -586,11 +592,11 @@ function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
             }
 
             else if(tab_etage[i].getId()==="Eteindre"){
-                chaine = chaine+"O"+rgbToHex(tab_etage[i].getStyle());
+                chaine = chaine+"O"+"000000";
             }
 
             else if(tab_etage[i].getId()==="Degrader"){
-                chaine = chaine+"R"+rgbToHex(tab_etage[i].getStyle())+rgbToHex(tab_etage[i].getStyleDegra());           
+                chaine = chaine+"R"+rgbToHex(tab_etage[i].getStyle())+"S"+rgbToHex(tab_etage[i].getStyleDegra());           
             }
 
             else if(tab_etage[i].getId()==="Clignoter"){
@@ -598,7 +604,7 @@ function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
             }
         }
     }
-    
+    chaine = chaine+"W" // Fin de la chaine
     return chaine;
 }
 
@@ -617,7 +623,7 @@ function rgbToHex(style) {
 // Fonction d'annimation de la barre de temps
 function barreMove(elmt) {
     var tempo = getTempo()*1000;    // Récupération de la durée des pièces
-    var pos = 39;
+    var pos = 41;
     var id = setInterval(frame, tempo/61);
     function frame() {
         if ((pos == 955)||(myGlobals.stop)) {
@@ -645,5 +651,5 @@ function open_infos() {
         var left = (document.body.clientWidth-width)/2;
         var top = (document.body.clientHeight-height)/2;
     }
-    window.open('/tuto3','nom_de_ma_popup','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
+    window.open('/connect','nom_de_ma_popup','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }

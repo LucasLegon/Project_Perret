@@ -1,0 +1,64 @@
+body {
+    /* L'image est positionnée en fond et est centrée */
+background: url(fondHome.svg) no-repeat center center fixed;
+/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+    
+}
+
+header, footer
+{
+    height: 230px;
+}
+
+h1
+{
+    font-family: 'Andika', sans-serif;
+    font-size: 4em;
+    color: rgb(255,30,30);
+}
+
+#menu
+{
+    display: flex;
+    flex-direction: column;
+    background: rgb(254,213,196);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
+    border: 12px rgb(245,0,0) ridge;
+    border-radius: 50px;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+    align-items:center;
+}
+
+
+#boutons
+{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    justify-content: space-around;
+}
+
+a
+{
+    font-family: 'Andika', sans-serif;
+    color: white;
+    background: linear-gradient(rgb(100,0,0), rgb(245,0,0));
+    border: 1px solid #760001;
+    border-radius: 5px;
+    font-size: 2em;
+    text-align: center;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
+}
+
+a:hover
+{
+    background: linear-gradient(rgb(0,100,0), rgb(0,245,0));
+}
+

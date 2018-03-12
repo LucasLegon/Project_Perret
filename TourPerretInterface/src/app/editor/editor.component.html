@@ -9,7 +9,7 @@
             </div>
             
             <div id="accueil_down">
-                <img (click)="goBack()" class="fichier" id="Send" src="assets/ImPNG/Menu/Send.svg" width="45" height="45" title="Send">
+                <img (click)="goSend()" class="fichier" id="Send" src="assets/ImPNG/Menu/Send.svg" width="45" height="45" title="Send">
                 <img (click)="goUndo()" class="fichier" id="Undo" src="assets/ImPNG/Menu/Undo.svg" width="45" height="49" title="Annuler">
             </div>
         </div>
@@ -20,6 +20,8 @@
         </div>
             
         <div id="fonction">
+             <p id="duree"> Durée des pièces : <input id="duree_input" type="number" min="1" max="10" step="0.1" value="1"/> secondes</p>
+
             <p> 
                 <img title ="Allumer" class="fonct" id="Allumer" src="assets/ImPNG/Pieces/Piece_Allumer.svg" width="80" height="63" > <br/>
             </p>
@@ -43,7 +45,7 @@
             <p id="para_color"></p>
             <div id="bloc_color">
                 <div id="color_top">
-                    <img (click)="putNoir()" class="color" id="Noir" src="assets/ImPNG/Couleurs/noir.png" width="30" height="30">
+                    <img (click)="putRose()" class="color" id="Rose" src="assets/ImPNG/Couleurs/rose.png" width="30" height="30">
                     <img (click)="putMarron()" class="color" id="Marron" src="assets/ImPNG/Couleurs/marron.png" width="30" height="30">
                     <img (click)="putOrange()" class="color" id="Orange" src="assets/ImPNG/Couleurs/orange.png" width="30" height="30">
                     <img (click)="putVert()" class="color" id="Vert" src="assets/ImPNG/Couleurs/vert.png" width="30" height="30">

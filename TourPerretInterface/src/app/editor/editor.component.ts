@@ -148,8 +148,36 @@ export class EditorComponent implements OnInit {
         alert('Retour arrière');  
     }
  
- 
- 
+     goSend(): void {
+        // SI C'EST LA PREMIERE FOIS
+        var etage1 = document.getElementById("color_etage1");
+       var etage2 = document.getElementById("color_etage2");
+        var etage3 = document.getElementById("color_etage3");
+        
+        //Protocole :
+        //  X=Etage 1
+        //  Y=Etage 2
+        //  Z=Etage 3
+        
+        var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+        var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+        var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+        console.log("Etage 1 : %s",message_etage1);
+        console.log("Etage 2 : %s",message_etage2);
+        console.log("Etage 3 : %s",message_etage3);
+         
+         var mqtt = require('mqtt');
+        var client =mqtt.connect('mqtt://fde52271:0b9c06301e82918f@broker.shiftr.io', {clientId:'Cla'});
+        
+        client.publish("121212/ACK","1");
+        client.publish("121212/Etage1", message_etage1);
+        client.publish("121212/Etage2", message_etage2);
+        client.publish("121212/Etage3", message_etage3);
+        client.publish("121212/ACK","0");
+        
+        alert('Message envoyé'); 
+    }
+  
  
  
  
@@ -178,8 +206,8 @@ export class EditorComponent implements OnInit {
 
 
 // Couleur
-    putNoir(): void {
-        document.getElementById("couleur_piece").setAttribute("style", "fill:#000000;fill-opacity:1");
+    putRose(): void {
+        document.getElementById("couleur_piece").setAttribute("style", "fill:#F04E98;fill-opacity:1");
     }
   
     putMarron(): void {
@@ -223,7 +251,40 @@ export class EditorComponent implements OnInit {
          ///////////////////////////////
         // Déclaration des fonctions //
        ///////////////////////////////
+function sendEtage(etage,down,middle,top){
 
+    // Initialisation de l'éclairage //
+    etage.style.backgroundColor = "silver";
+    
+    // TABLEAU DE COULEURS TOP //
+    var tab_color_top = new Array();
+    tab_color_top = tableauCouleur(top);
+    var tab_color_top_len = tab_color_top.length;
+    
+    // TABLEAU DE COULEURS DOWN //
+    var tab_color_down = new Array();
+    tab_color_down = tableauCouleur(down);
+    var tab_color_down_len = tab_color_down.length;
+    
+    // TABLEAU DES IDs DES FONCTIONS //
+    var tab_id = new Array();
+    tab_id = tableauId(middle);
+    var tab_id_len = tab_id.length;
+    
+    // TABLEAU DES PIECES FONCTIONS //
+    var tab = new Array();
+    tab = tableauPiece(tab_id,tab_id_len,tab_color_top,tab_color_top_len,tab_color_down,tab_color_down_len);
+    if(tab==null){
+        alert('Il y a une erreur dans ta programmation');
+    }
+    else{
+        // CREATION DE LA CHAINE //
+        var tempo = getTempo()*1000;    // Récupération de la durée des pièces
+        var tab_len = tab.length;
+        var chaine = creerChaineProtocole(tab,tab_len,tempo);
+        return chaine;
+    }
+}
 
 // Fonction principale faisant le traitement pour un étage passé en paramètre
 function playEtage(etage,down,middle,top){
@@ -412,4 +473,82 @@ function clignoterTour(etage,piece,nb_cligno,tempo){
         nb_cligno--;
         setTimeout(clignoterTour, tempo,etage,piece,nb_cligno,tempo);
     }
+}
+
+// Fonction qui nous renvoie la durée que dois avoir les pièces, en secondes
+function getTempo(){
+    return (parseFloat((<HTMLInputElement>document.getElementById("duree_input")).value));
+}
+
+
+
+// Fonction qui créé la chaine de caractère que nous allons envoyer sur le serveur MQTT. Un protocole a été défini pour coder cette chaine et la décoder facilement
+function creerChaineProtocole(tab_etage,tab_etage_len,tempo){
+    //Protocole :
+    //  T=Temporisation
+    //  L=Allumer
+    //  O=Eteindre
+    //  R=Degrader, S=Degrader deuxième couleur
+    //  P=Clignoter
+    //  W=Fin
+    
+    var chaine;
+    if(tab_etage_len===0)
+    {
+        chaine = "null";
+    }
+    
+    else {
+        chaine = "T"+tempo;
+        for (var i = 0; i < tab_etage_len; i++){
+            if(tab_etage[i].getId()==="Allumer"){
+                chaine = chaine+"L"+rgbToHex(tab_etage[i].getStyle());
+            }
+
+            else if(tab_etage[i].getId()==="Eteindre"){
+                chaine = chaine+"O"+"000000";
+            }
+
+            else if(tab_etage[i].getId()==="Degrader"){
+                chaine = chaine+"R"+rgbToHex(tab_etage[i].getStyle())+"S"+rgbToHex(tab_etage[i].getStyleDegra());           
+            }
+
+            else if(tab_etage[i].getId()==="Clignoter"){
+                chaine = chaine+"P"+rgbToHex(tab_etage[i].getStyle()); 
+            }
+        }
+    }
+    chaine = chaine+"W" // Fin de la chaine
+    return chaine;
+}
+
+
+
+// Fonction qui convertie une couleur RGB en HEXA. Utilisée dans la fonction creerChaineProtocole
+function rgbToHex(style) {
+    var stylergb = style.slice(4,-1).split(',');
+
+    var tab_rgb = [parseInt(stylergb[0],10),parseInt(stylergb[1],10),parseInt(stylergb[2],10)];
+    return ((1 << 24) + (tab_rgb[0] << 16) + (tab_rgb[1] << 8) + tab_rgb[2]).toString(16).slice(1);
+}
+
+
+
+
+
+
+
+function open_infos() {
+    var width = 500;
+    var height = 300;
+    if(window.innerWidth){
+        var left = (window.innerWidth-width)/2;
+        var top = (window.innerHeight-height)/2;
+    }
+    else
+    {
+        var left = (document.body.clientWidth-width)/2;
+        var top = (document.body.clientHeight-height)/2;
+    }
+    window.open('/connect','nom_de_ma_popup','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }

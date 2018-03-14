@@ -15,6 +15,8 @@ import { AppGlobals } from '../macId';
 
 export class EditorComponent implements OnInit {
 
+    private data : number;
+
          ////////////////////////////////////////
         // Déclaration des différentes pièces //
        ////////////////////////////////////////
@@ -170,8 +172,11 @@ export class EditorComponent implements OnInit {
   
     goSend(): void {
         // SI C'EST LA PREMIERE FOIS
-        console.log("%d",this.global.macID);
-        if(!this.global.macID){
+        
+        //this.global.macID.subscribe((data) => this.data = data);
+        
+       console.log("%s",this.global.getData());
+       if(!this.data){
             open_infos();
         }
         var etage1 = document.getElementById("color_etage1");
@@ -183,14 +188,23 @@ export class EditorComponent implements OnInit {
         //  Y=Etage 2
         //  Z=Etage 3
         
-        var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
-        var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
-        var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+        var message_etage1 = sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+        var message_etage2 = sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+        var message_etage3 = sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
         console.log("Etage 1 : %s",message_etage1);
         console.log("Etage 2 : %s",message_etage2);
-        console.log("Etage 3 : %s",message_etage3);
+        console.log("Etage 3 : %s",message_etage3); 
         
-        alert('Message envoyé'); 
+        var mqtt = require('mqtt');
+        var client =mqtt.connect('mqtt://tourperret:iese1212@broker.shiftr.io', {clientId:'INTERFACE'});
+        
+        client.publish("121212/ACK","1");
+        client.publish("121212/Etage1", message_etage1);
+        client.publish("121212/Etage2", message_etage2);
+        client.publish("121212/Etage3", message_etage3);
+        client.publish("121212/ACK","0");
+        
+        alert('Message envoyé');
     }
   
     goUndo(): void {
@@ -243,10 +257,10 @@ export class EditorComponent implements OnInit {
 
 
 // Couleur
-    putNoir(): void {
+    putRose(): void {
         var divColor = document.getElementById("fond_piece_color");
     
-        divColor.style.backgroundColor = "black";
+        divColor.style.backgroundColor = "rgb(255,0,255)";
     }
   
     putMarron(): void {

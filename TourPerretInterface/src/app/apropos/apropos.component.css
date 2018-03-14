@@ -1,6 +1,6 @@
 body {
     /* L'image est positionnée en fond et est centrée */
-background: url(fond.svg) no-repeat center center fixed;
+background: url(fond.jpg) no-repeat center center fixed;
 /* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
 -webkit-background-size: cover;
 -moz-background-size: cover;
@@ -11,7 +11,7 @@ background-size: cover;
 
 header, footer
 {
-    height: 50px;
+    height: 103px;
 }
 
 h1
@@ -20,69 +20,57 @@ h1
     text-align: center;
 }
 
-h2
-{
-    font-size: 1.5em;
-    text-align: center;
-}
-
-#consigne
-{
-    margin-left: auto;
-    margin-right: auto;
-    width: 500px;
-    text-align: justify;
-    font-size: 0.8em;
-}
-
-#tuto
+#apropos
 {
     display: flex;
     flex-direction: column;
-    background: rgb(70,70,255);
+    background: rgb(70,200,70);
     box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
-    border: 12px rgb(0,0,255) ridge;
+    border: 12px rgb(0,125,0) ridge;
     border-radius: 50px;
-    width: 550px;
-    height: 650px;
+    width: 500px;
+    height: 550px;
     margin: auto;
     font-family: 'Andika', Arial, sans-serif;
     color: white;
-    justify-content: space-between;
 }
 
-#fleches
+#paragraphe
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    text-align: justify;
+    font-size: 0.8em;
+    
+    position: relative;
+    bottom: 30px;
+}
+
+#images_ecoles
 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding-left: 410px;
 }
 
-#outil
+#polytech, #uga
 {
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: 6px 6px 6px black;
 }
 
-#page
+#back
 {
-    font-size: 1.2em;
+    display: flex;
+    justify-content: flex-end;
+    
+    position: relative;
+    top: 30px;
+    right: 10px;
 }
 
-#suivant:hover, #precedent:hover{
+#retour:hover{
     opacity: 0.7;
 	cursor:pointer;
-}
-
-#suivant
-{
-    position: relative;
-    top: 2px;
-}
-
-#precedent
-{
-    transform: rotate(180deg);
 }

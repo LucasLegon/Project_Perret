@@ -8,7 +8,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { Tuto1Component } from './tuto1/tuto1.component';
 import { Tuto2Component } from './tuto2/tuto2.component';
 import { Tuto3Component } from './tuto3/tuto3.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ConnectComponent } from './connect/connect.component';
+import { AproposComponent } from './apropos/apropos.component';
+import { AppGlobals } from './macId';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -19,15 +23,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     Tuto1Component,
     EditorComponent,
     Tuto2Component,
-    Tuto3Component
+    Tuto3Component,
+    ConnectComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-      BrowserAnimationsModule
+    NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [AppGlobals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

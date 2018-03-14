@@ -1,6 +1,6 @@
 body {
     /* L'image est positionnée en fond et est centrée */
-background: url(fondHome.svg) no-repeat center center fixed;
+background: url(fond.jpg) no-repeat center center fixed;
 /* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
 -webkit-background-size: cover;
 -moz-background-size: cover;
@@ -11,12 +11,12 @@ background-size: cover;
 
 header, footer
 {
-    height: 230px;
+    height: 210px;
 }
 
 h1
 {
-    font-family: 'Andika', sans-serif;
+    font-family: 'Andika', Arial, sans-serif;
     font-size: 4em;
     color: rgb(255,30,30);
 }
@@ -30,7 +30,7 @@ h1
     border: 12px rgb(245,0,0) ridge;
     border-radius: 50px;
     width: 500px;
-    height: 300px;
+    height: 350px;
     margin: auto;
     align-items:center;
 }
@@ -44,9 +44,15 @@ h1
     justify-content: space-around;
 }
 
+#apropos
+{
+    position: relative;
+    top: 30px;
+}
+
 a
 {
-    font-family: 'Andika', sans-serif;
+    font-family: 'Andika', Arial, sans-serif;
     color: white;
     background: linear-gradient(rgb(100,0,0), rgb(245,0,0));
     border: 1px solid #760001;

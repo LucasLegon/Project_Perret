@@ -166,7 +166,7 @@ export class EditorComponent implements OnInit {
         console.log("Etage 2 : %s",message_etage2);
         console.log("Etage 3 : %s",message_etage3);
          
-         var mqtt = require('mqtt');
+        var mqtt = require('mqtt');
         var client =mqtt.connect('mqtt://fde52271:0b9c06301e82918f@broker.shiftr.io', {clientId:'Cla'});
         
         client.publish("121212/ACK","1");

@@ -1,0 +1,88 @@
+body {
+    /* L'image est positionnée en fond et est centrée */
+background: url(fond.svg) no-repeat center center fixed;
+/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+    
+}
+
+header, footer
+{
+    height: 50px;
+}
+
+h1
+{
+    font-size: 2em;
+    text-align: center;
+}
+
+h2
+{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#consigne
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    text-align: justify;
+    font-size: 0.8em;
+}
+
+#tuto
+{
+    display: flex;
+    flex-direction: column;
+    background: rgb(70,70,255);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
+    border: 12px rgb(0,0,255) ridge;
+    border-radius: 50px;
+    width: 550px;
+    height: 650px;
+    margin: auto;
+    font-family: 'Andika', Arial, sans-serif;
+    color: white;
+    justify-content: space-between;
+}
+
+#fleches
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 410px;
+}
+
+#outil
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#page
+{
+    font-size: 1.2em;
+}
+
+#suivant:hover, #precedent:hover{
+    opacity: 0.7;
+	cursor:pointer;
+}
+
+#suivant
+{
+    position: relative;
+    top: 2px;
+}
+
+#precedent
+{
+    transform: rotate(180deg);
+}

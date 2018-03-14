@@ -1,0 +1,76 @@
+body {
+    /* L'image est positionnée en fond et est centrée */
+background: url(fond.jpg) no-repeat center center fixed;
+/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+    
+}
+
+header, footer
+{
+    height: 103px;
+}
+
+h1
+{
+    font-size: 2em;
+    text-align: center;
+}
+
+#apropos
+{
+    display: flex;
+    flex-direction: column;
+    background: rgb(70,200,70);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
+    border: 12px rgb(0,125,0) ridge;
+    border-radius: 50px;
+    width: 500px;
+    height: 550px;
+    margin: auto;
+    font-family: 'Andika', Arial, sans-serif;
+    color: white;
+}
+
+#paragraphe
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    text-align: justify;
+    font-size: 0.8em;
+    
+    position: relative;
+    bottom: 30px;
+}
+
+#images_ecoles
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#polytech, #uga
+{
+    box-shadow: 6px 6px 6px black;
+}
+
+#back
+{
+    display: flex;
+    justify-content: flex-end;
+    
+    position: relative;
+    top: 30px;
+    right: 10px;
+}
+
+#retour:hover{
+    opacity: 0.7;
+	cursor:pointer;
+}

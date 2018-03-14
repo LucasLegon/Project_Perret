@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppGlobals } from '../macId';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-connect',
@@ -14,13 +16,13 @@ export class ConnectComponent implements OnInit {
   }
 
     goConnect(){
-        var macId = getMacId();
-        if(!macId){
+        var data = getMacId();
+        if(!data){
             alert("Veuillez rentrer un identifiant MAC valide");
         }
         
         else{
-            this.global.setMacId(macId);
+            this.global.macID = of(data);
             window.close();
         }
     }

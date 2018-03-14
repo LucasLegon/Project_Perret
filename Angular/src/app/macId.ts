@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class AppGlobals {
-    macID: number = 0;
+    public macID : Observable <number>;
     
-    setMacId(id: number){
-        this.macID=id;
-    }
+    getData(): Observable<number> {
+    return (this.macID);
+  }
 }

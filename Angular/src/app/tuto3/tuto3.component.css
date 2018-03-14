@@ -222,6 +222,8 @@ h2
     display: flex;
     flex-direction: row;
     align-items:flex-end;
+    position: relative;
+    top: 7px;
 }
 
 #couleur

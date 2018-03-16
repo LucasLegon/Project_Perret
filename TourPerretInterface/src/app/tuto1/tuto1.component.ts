@@ -12,7 +12,7 @@ export class Tuto1Component implements OnInit {
 
   ngOnInit() {
   }
-  
+
   goBack(): void {
         this.location.back();
   }

@@ -1,10 +1,40 @@
 import { Piece } from './editor/piece';
 import * as myGlobals from './editor/globals';
+import{mqttID} from './editor/globals';
+import * as mqtt from 'mqtt';
+
+
          ///////////////////////////////
         // Déclaration des fonctions //
        ///////////////////////////////
+export function goSend(m : mqttID): void {
+           // SI C'EST LA PREMIERE FOIS
+               var etage1 = document.getElementById("color_etage1");
+               var etage2 = document.getElementById("color_etage2");
+               var etage3 = document.getElementById("color_etage3");
 
+               //Protocole :
+               //  X=Etage 1
+               //  Y=Etage 2
+               //  Z=Etage 3
 
+               var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+               var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+               var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+               //console.log("Etage 1 : %s",message_etage1);
+               //console.log("Etage 2 : %s",message_etage2);
+               //console.log("Etage 3 : %s",message_etage3);
+
+               m.client.publish(m.macID+"/ACK","1");
+               m.client.publish(m.macID+"/Etage1", message_etage1);
+               m.client.publish(m.macID+"/Etage2", message_etage2);
+               m.client.publish(m.macID+"/Etage3", message_etage3);
+               m.client.publish(m.macID+"/ACK","0");
+       }
+
+export function Disconnect(m : mqttID): void {
+    m.client.end();
+}
 
        ///////////////////////////////
       // Déclaration des fonctions //

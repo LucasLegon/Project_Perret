@@ -4,7 +4,9 @@ import { Piece } from './piece';
 import * as myGlobals from './globals';
 import { AppGlobals } from '../macId';
 import * as mqtt from 'mqtt';
-import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove } from '../utils';
+import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove, goSend, Disconnect } from '../utils';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import{mqttID} from './globals';
 
 @Component({
   selector: 'app-editor',
@@ -14,15 +16,50 @@ import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove 
 
 
 
-
 export class EditorComponent implements OnInit {
 
          ////////////////////////////////////////
         // Déclaration des différentes pièces //
        ////////////////////////////////////////
+       closeResult:string;
+       inputMacId: number;
+
+       IDmqtt : mqttID = {
+         macID : -1,
+         client : null,
+         isConnected:0
+       };
+
+  constructor(private location: Location, private global : AppGlobals, private modalService: NgbModal) { }
 
 
-  constructor(private location: Location, private global : AppGlobals) { }
+  open(modal) {
+      this.modalService.open(modal).result.then((result) => {
+          if(this.IDmqtt.macID==-1)
+          {
+            this.IDmqtt.client =mqtt.connect('mqtt://fde52271:0b9c06301e82918f@broker.shiftr.io', {clientId:'User'});
+            this.IDmqtt.macID=this.inputMacId;
+            goSend(this.IDmqtt);
+          }
+          else{
+            goSend(this.IDmqtt);
+          }
+          this.closeResult = `Closed with: ${result}`;
+
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
 
   ngOnInit() {
         myGlobals.setIndiceLetter(0);
@@ -170,45 +207,6 @@ export class EditorComponent implements OnInit {
         alert('Travail enregistré');
     }
 
-    goSend(): void {
-        // SI C'EST LA PREMIERE FOIS
-        this.global.macID.subscribe((macID) => {
-          alert(macID);
-          if(macID==0){
-              open_infos();
-          }
-          else{
-            var etage1 = document.getElementById("color_etage1");
-            var etage2 = document.getElementById("color_etage2");
-            var etage3 = document.getElementById("color_etage3");
-
-            //Protocole :
-            //  X=Etage 1
-            //  Y=Etage 2
-            //  Z=Etage 3
-
-            var message_etage1 = "X"+sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
-            var message_etage2 = "Y"+sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
-            var message_etage3 = "Z"+sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
-            console.log("Etage 1 : %s",message_etage1);
-            console.log("Etage 2 : %s",message_etage2);
-            console.log("Etage 3 : %s",message_etage3);
-
-
-            var client =mqtt.connect('mqtt://fde52271:0b9c06301e82918f@broker.shiftr.io', {clientId:'Cla'});
-
-            client.publish(macID+"/ACK","1");
-            client.publish(macID+"/Etage1", message_etage1);
-            client.publish(macID+"/Etage2", message_etage2);
-            client.publish(macID+"/Etage3", message_etage3);
-            client.publish(macID+"/ACK","0");
-
-            alert('Message envoyé');
-          }
-
-
-      });
-    }
 
     goUndo(): void {
         alert('Retour arrière');

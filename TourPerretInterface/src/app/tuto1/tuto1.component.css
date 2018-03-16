@@ -1,13 +1,19 @@
-body {
-    /* L'image est positionnée en fond et est centrée */
-background: url(fond.svg) no-repeat center center fixed;
-/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-    
-}
+body{
+  display: flex;
+  height: 800px;
+  width: 1800px;
+  background: url(fond.svg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  margin : 0px;
+  }
+
+  #Exit
+  {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+  }
 
 header, footer
 {
@@ -16,73 +22,65 @@ header, footer
 
 h1
 {
-    font-size: 2em;
+    display: inherit;
+    font-size: 3em;
     text-align: center;
+    margin-top: 0vh;
+    margin-left: 13vw;
+
 }
 
 h2
 {
-    font-size: 1.5em;
+    display: inherit;
+    font-size: 1.8em;
     text-align: center;
+    margin-top : 0vh;
+    margin-left: 7vw;
+
 }
 
 #consigne
 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 500px;
+    display: inherit;
+    width: 33vw;
+    height:50vh;
     text-align: justify;
-    font-size: 0.8em;
+    font-size: 1em;
+    margin-left: 1vw;
+
 }
 
 #tuto
 {
-    display: flex;
+    display: inherit;
     flex-direction: column;
-    background: rgb(70,70,255);
-    box-shadow: 0 0 60px rgba(0, 0, 0, 1) inset;
-    border: 12px rgb(0,0,255) ridge;
-    border-radius: 50px;
-    width: 550px;
-    height: 650px;
-    margin: auto;
     font-family: 'Andika', Arial, sans-serif;
+    background-color: #6a89cc;
+    border-radius: 50px;
     color: white;
     justify-content: space-between;
+    height: 80vh;
+    width: 35vw;
+    margin-top: 10vh;
+    margin-left:32vw;
 }
 
-#fleches
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 410px;
-}
 
 #outil
 {
-    margin-left: auto;
-    margin-right: auto;
+    display: inherit;
+}
+
+#im_outil
+{
+  margin-left: 2vw;
+  margin-bottom: 3vh;
+  width:33vw;
+  height:9vh;
 }
 
 #page
 {
     font-size: 1.2em;
-}
-
-#suivant:hover, #precedent:hover{
-    opacity: 0.7;
-	cursor:pointer;
-}
-
-#suivant
-{
-    position: relative;
-    top: 2px;
-}
-
-#precedent
-{
-    transform: rotate(180deg);
 }

@@ -12,7 +12,8 @@ import { ConnectComponent } from './connect/connect.component';
 import { AproposComponent } from './apropos/apropos.component';
 import { AppGlobals } from './macId';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { TutoComponent } from './tuto/tuto.component';
+import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 
 
 
@@ -20,12 +21,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     HomeComponent,
+    TutoComponent,
     Tuto1Component,
     EditorComponent,
     Tuto2Component,
     Tuto3Component,
     ConnectComponent,
-    AproposComponent
+    AproposComponent,
+    ModalBasicComponent
   ],
   imports: [
     BrowserModule,

@@ -14,3 +14,10 @@ export var stop;
 export function setStop(newValue: Boolean) {
     stop = newValue;
 }
+
+export class mqttID {
+  client;
+  macID: number;
+  isConnected : number;
+
+}

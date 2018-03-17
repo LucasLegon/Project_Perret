@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppGlobals } from '../macId';
-import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { sendEtage, playEtage, tableauCouleur, tableauId } from '../utils';
+import * as mqtt from 'mqtt';
+
 
 @Component({
   selector: 'app-connect',
@@ -10,25 +12,22 @@ import { of } from 'rxjs/observable/of';
 })
 export class ConnectComponent implements OnInit {
 
-  constructor(public global:AppGlobals) { }
+  inputMacId: number;
+  macID: number;
+
+  constructor(private global:AppGlobals) { }
 
   ngOnInit() {
   }
 
     goConnect(){
-        var data = getMacId();
-        if(!data){
-            alert("Veuillez rentrer un identifiant MAC valide");
-        }
-        
-        else{
-            this.global.macID = of(data);
-            window.close();
-        }
-    }
-}
+      //alert(this.inputMacId);
 
-// Fonction qui nous renvoie le MAC ID
-function getMacId(){
-    return (parseInt((<HTMLInputElement>document.getElementById("Mac_ID")).value,10));
+      if (this.inputMacId) {
+          this.global.macID = of(this.inputMacId);
+          window.close();
+      } else {
+        alert("Veuillez rentrer un identifiant MAC valide");
+      }
+    }
 }

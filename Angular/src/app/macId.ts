@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AppGlobals {
-    public macID : Observable <number>;
-    
-    getData(): Observable<number> {
-    return (this.macID);
-  }
+    macID: Observable<number>;
+
+    constructor() {
+      this.macID = of(0);
+    }
 }

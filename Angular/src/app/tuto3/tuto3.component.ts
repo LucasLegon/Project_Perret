@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tuto3',
@@ -8,12 +7,8 @@ import { Location } from '@angular/common';
 })
 export class Tuto3Component implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  
-  goBack(): void {
-        this.location.back();
   }
 }

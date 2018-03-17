@@ -1,12 +1,10 @@
-body {
-    /* L'image est positionnée en fond et est centrée */
-background: url(fond.jpg) no-repeat center center fixed;
-/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-    
+body{
+    display: flex;
+    background: url(fond.jpg) no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    margin : 0px;
+    height: 795px;
 }
 
 header, footer
@@ -33,10 +31,16 @@ h1
     height: 370px;
     margin: auto;
     align-items:center;
+    justify-content: space-around;
 }
 
-
 #boutons
+{
+    position: relative;
+    bottom: 40px;
+}
+
+#boutons_top
 {
     display: flex;
     flex-direction: row;
@@ -46,8 +50,10 @@ h1
 
 #apropos
 {
+    display: flex;
     position: relative;
     top: 30px;
+    justify-content: center;
 }
 
 a

@@ -1,15 +1,12 @@
 <body>
-    
-    <header>
-        
-    </header>
-    
     <section id="tuto">
         <div id="titre">
+            <a routerLink="/home">
+<img id="Exit" src="assets/ImPNG/exit.svg" width="45" height="45" title="Quitter">
+            </a>
             <h1>Etape 1</h1>
             <h2>Présentation de l'application</h2>
         </div>
-        
         <div id="consigne">
             <p>
                 Commençons par te présenter l'application ! Comme tu peux le voir, en haut à droite, tu as à ta disposition plusieurs outils. Tu peux, dans la première session :
@@ -30,29 +27,19 @@
             <p>
                 Les deux dernières sessions sont les éléments que tu pourras utiliser pour créer ta programmation. Tu y trouveras :
             </p>
-            
+
             <ul>
                     <li>Les fonctions <img  src="assets/ImPNG/Pieces/allumer.png" width="18" height="15"></li>
                     <li>Les couleurs <img  src="assets/ImPNG/Pieces/piece_couleur.png" width="13" height="18"></li>
             </ul>
-            
+
             <p>
-                
+
             </p>
         </div>
-        
+
         <div id="outil">
-            <img id="im_outil" src="assets/ImPNG/outils.PNG" width="500" height="70"/>  
-        </div>
-        
-        <div id="fleches">
-            <img (click)="goBack()" id="precedent" src="assets/ImPNG/fleche_tuto.svg" width="50" height="47"/>
-            <p id="page">1</p>
-            <a routerLink="/tuto2"><img id="suivant" src="assets/ImPNG/fleche_tuto.svg" width="50" height="47"/></a>    
+            <img id="im_outil" src="assets/ImPNG/outils.PNG" width="480" height="70"/>
         </div>
     </section>
-    
-    <footer>
-        
-    </footer>
 </body>

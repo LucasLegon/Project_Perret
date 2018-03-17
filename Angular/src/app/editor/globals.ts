@@ -7,10 +7,19 @@ export function setIndiceLetter(newValue: number) {
 }
 
 
-
 // Arrêter les annimations //
 
 export var stop;
 export function setStop(newValue: Boolean) {
     stop = newValue;
+}
+
+
+// MQTT_ID //
+
+export class mqttID {
+  client;
+  macID: number;
+  isConnected : number;
+
 }

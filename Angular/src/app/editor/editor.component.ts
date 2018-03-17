@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Piece } from './piece';
 import * as myGlobals from './globals';
-import { AppGlobals } from '../macId';
 import * as mqtt from 'mqtt';
-import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove } from '../utils';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove, goSend, Disconnect  } from '../utils';
 
 @Component({
   selector: 'app-editor',
@@ -17,12 +17,19 @@ import { open_infos, sendEtage, playEtage, tableauCouleur, tableauId, barreMove 
 
 export class EditorComponent implements OnInit {
 
-         ////////////////////////////////////////
-        // Déclaration des différentes pièces //
-       ////////////////////////////////////////
+        /////////////////////////
+        // Variables globales //
+       ////////////////////////
+       closeResult:string;
+       inputMacId: number;
 
+       IDmqtt : myGlobals.mqttID = {
+         macID : -1,
+         client : null,
+         isConnected:0
+       };
 
-  constructor(private location: Location, private global : AppGlobals) { }
+  constructor(private location: Location, private modalService: NgbModal) { }
 
   ngOnInit() {
         myGlobals.setIndiceLetter(0);
@@ -133,6 +140,40 @@ export class EditorComponent implements OnInit {
 
 
 
+
+         ////////////////////////////
+        // Ouverture de la Modale //
+       ////////////////////////////
+
+  open(modal) {
+        console.log("%d",this.inputMacId);
+        if(!this.inputMacId){
+            this.modalService.open(modal).result.then((result) => {        
+            this.IDmqtt.client =mqtt.connect('mqtt://tourperret:iese1212@broker.shiftr.io', {clientId:'INTERFACE'});
+            this.IDmqtt.macID=this.inputMacId;
+            this.closeResult = `Closed with: ${result}`;
+            }, (reason) => {
+                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            });
+        }
+        
+        else{
+            goSend(this.IDmqtt);
+        }
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+
+
          ///////////////////////
         // Actions aux clics //
        ///////////////////////
@@ -168,44 +209,6 @@ export class EditorComponent implements OnInit {
 
     goSave(): void {
         alert('Travail enregistré');
-    }
-
-    goSend(): void {
-        // SI C'EST LA PREMIERE FOIS
-        this.global.macID.subscribe((macID) => {
-          alert(macID);
-          if(!macID){
-              open_infos();
-          }
-
-          var etage1 = document.getElementById("color_etage1");
-         var etage2 = document.getElementById("color_etage2");
-          var etage3 = document.getElementById("color_etage3");
-
-          //Protocole :
-          //  X=Etage 1
-          //  Y=Etage 2
-          //  Z=Etage 3
-
-          var message_etage1 = sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
-          var message_etage2 = sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
-          var message_etage3 = sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
-          console.log("Etage 1 : %s",message_etage1);
-          console.log("Etage 2 : %s",message_etage2);
-          console.log("Etage 3 : %s",message_etage3);
-
-
-          var mqtt = require('mqtt');
-          var client =mqtt.connect('mqtt://tourperret:iese1212@broker.shiftr.io', {clientId:'INTERFACE'});
-        
-          client.publish("121212/ACK","1");
-          client.publish("121212/Etage1", message_etage1);
-          client.publish("121212/Etage2", message_etage2);
-          client.publish("121212/Etage3", message_etage3);
-          client.publish("121212/ACK","0");
-        
-          alert('Message envoyé');
-      });
     }
 
     goUndo(): void {

@@ -50,30 +50,19 @@
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-body {
-    /* L'image est positionnée en fond et est centrée */
-background: url(fond.svg) no-repeat center center fixed;
-/* Ajout de la propriété avec les préfixes pour tous les moteurs de rendu */
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-    
+body{
+    display: flex;
+    background: url(fond.svg) no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    margin : 0px;
+    height: 795px;
 }
 
-header, footer
+#Exit
 {
-    height: 50px;
+    position: relative;
+    left: 30px;
 }
 
 h1
@@ -120,6 +109,8 @@ h2
     text-align: justify;
     font-size: 0.8em;
     justify-content: space-between;
+    position: relative;
+    bottom: 120px;
 }
 
 .paragraphe
@@ -173,38 +164,4 @@ h2
     width: 21px;
     height: 37px;
     animation: anim_etage3 3s alternate infinite;
-}
-
-
-
-
-/* Flèches et numéro de page */
-#fleches
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 410px;
-}
-
-#page
-{
-    font-size: 1.2em;
-}
-
-#suivant:hover, #precedent:hover{
-    opacity: 0.7;
-	cursor:pointer;
-}
-
-#suivant
-{
-    position: relative;
-    top: 2px;
-}
-
-#precedent
-{
-    transform: rotate(180deg);
 }

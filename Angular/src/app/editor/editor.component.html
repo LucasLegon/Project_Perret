@@ -1,4 +1,24 @@
 <body>
+    
+    
+    <ng-template #modal let-c="close" let-d="dismiss" id="modal">
+          <div class="modal-header">
+            <h4 class="modal-title">Envoyer sur une tour</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p> ID de la tour : <input [(ngModel)]="inputMacId" type="number" name="Mac_ID" id="Mac_ID" placeholder="Ex : 121212" size="10" maxlength="10" /></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Send')">Envoyer</button>
+
+          </div>
+    </ng-template>
+    
+    
+    
     <img (click)="goBack()" class="fichier" id="Exit" src="assets/ImPNG/exit.svg" width="45" height="45" title="Quitter">
     <img class="poubelle" src="assets/ImPNG/poubelle.png" width="75" height="90"/>
     <div id="orientation_tour">
@@ -14,7 +34,7 @@
             </div>
             
             <div id="accueil_down">
-                <img (click)="goSend()" class="fichier" id="Send" src="assets/ImPNG/envoyer.svg" width="45" height="45" title="Envoyer">
+                <img (click)="open(modal)" class="fichier" id="Send" src="assets/ImPNG/envoyer.svg" width="45" height="45" title="Envoyer">
                 <img (click)="goUndo()" class="fichier" id="Undo" src="assets/ImPNG/undo.svg" width="45" height="49" title="Annuler">
             </div>
         </div>
@@ -90,7 +110,7 @@
             <div id="etage3">
                 <img class="start" src="assets/ImPNG/Pieces/start.png" width="80" height="63"/>
                 <div class="zone-piece">
-                    <div id="etage3_top">
+                    <div class="coulor_top" id="etage3_top">
                         <div class="zone"></div>
                         <div class="zone"></div>
                         <div class="zone"></div>
@@ -149,7 +169,7 @@
             <div id="etage2">
                 <img class="start" src="assets/ImPNG/Pieces/start.png" width="80" height="63"/>
                 <div class="zone-piece">
-                    <div id="etage2_top">
+                    <div class="coulor_top" id="etage2_top">
                         <div class="zone"></div>
                         <div class="zone"></div>
                         <div class="zone"></div>
@@ -210,7 +230,7 @@
             <div id="etage1">
                 <img class="start" src="assets/ImPNG/Pieces/start.png" width="80" height="63"/>
                 <div class="zone-piece">
-                    <div  id="etage1_top">
+                    <div class="coulor_top" id="etage1_top">
                         <div class="zone"></div>
                         <div class="zone"></div>
                         <div class="zone"></div>

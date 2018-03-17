@@ -1,9 +1,29 @@
 import { Piece } from './editor/piece';
 import * as myGlobals from './editor/globals';
+
          ///////////////////////////////
         // Déclaration des fonctions //
        ///////////////////////////////
 
+export function goSend(m : myGlobals.mqttID): void {
+    var etage1 = document.getElementById("color_etage1");
+    var etage2 = document.getElementById("color_etage2");
+    var etage3 = document.getElementById("color_etage3");
+
+    var message_etage1 = sendEtage(etage1,"etage1_down","etage1_middle","etage1_top");
+    var message_etage2 = sendEtage(etage2,"etage2_down","etage2_middle","etage2_top");
+    var message_etage3 = sendEtage(etage3,"etage3_down","etage3_middle","etage3_top");
+
+    m.client.publish(m.macID+"/ACK","1");
+    m.client.publish(m.macID+"/Etage1", message_etage1);
+    m.client.publish(m.macID+"/Etage2", message_etage2);
+    m.client.publish(m.macID+"/Etage3", message_etage3);
+    m.client.publish(m.macID+"/ACK","0");
+}
+
+export function Disconnect(m : myGlobals.mqttID): void {
+    m.client.end();
+}
 
 
 export function sendEtage(etage,down,middle,top){

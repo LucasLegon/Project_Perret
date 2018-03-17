@@ -11,21 +11,6 @@
 }
 
 
-
-@-webkit-keyframes anim_etage1 { /* Safari, Opera, Chrome */
-    0% {
-        background-color: fuchsia;
-    }
-
-    100% {
-        background-color: black;
-    }
-}
-
-.classname{
-    animation: anim_etage1 1s;
-}
-
 /* Fond d'écran */
 body {
     background: url(fond.svg) no-repeat center center fixed;
@@ -35,9 +20,6 @@ body {
 -o-background-size: cover;
 background-size: cover;
 }
-
-
-
 
 
 /* Flèches et orientation de la tour */
@@ -50,7 +32,7 @@ background-size: cover;
     justify-content: space-between;
     width: 235px;
     position: absolute;
-    top: 70px;
+    top: 100px;
     left: 100px;
     z-index: 2;
 }
@@ -92,7 +74,7 @@ background-size: cover;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 110px;
+    width: 150px;
 }
 
 #accueil_top
@@ -113,29 +95,36 @@ background-size: cover;
 {
     display: flex;
     flex-direction: column;
+    height:130px;
     border-left:2px solid rgb(245,0,0);
     border-right:2px solid rgb(245,0,0);
     padding: 20px;
+    justify-content: space-between;
 }
 
 #fonction
 {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 130px;
-    border-right: 2px solid rgb(245,0,0);
+    width: 450px;
+}
+
+#piece_fonction
+{
+    position: relative;
+    top: 2px;
 }
 
 #duree
 {
     position: relative;
-    bottom: 5px;
+    top: 13px;
 }
 
 #duree_input
 {
-    width: 40px
+    width: 50px;
+    height: 23px;
 }
 
 #piece_fonction
@@ -151,11 +140,13 @@ background-size: cover;
 {
     padding-left: 20px;
     padding-right: 20px;
-    width: 310px;
+    width: 335px;
+    height: 130px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:space-between;
+    border-left: 2px solid rgb(245,0,0);
 }
 
 p
@@ -198,12 +189,12 @@ p
 
 #fond_piece_color
 {
-    width: 45px;
-    height: 46px;
+    width: 46px;
+    height: 47px;
     background-color: rgb(0,0,0);
     border: 1px solid silver;
     position: relative;
-    bottom: 79px;
+    bottom: 74px;
     left: 8px;
 }
 
@@ -211,6 +202,8 @@ p
 #Couleur
 {
     height: 83px;
+    position: relative;
+    bottom: 10px;
 }
 
 #para_color
@@ -367,13 +360,16 @@ h1
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8) inset;
 }
 
+.coulor_top #Couleur{
+    position: relative;
+    top: 3px;
+}
+
 .coulor_inverse #Couleur{
     position: relative;
     bottom: 21px;
     transform: rotate(180deg);
 }
-
-
 
 #Exit
 {
